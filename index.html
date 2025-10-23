@@ -1,47 +1,51 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P5.js 分數與煙火特效</title>
+    <title>H5P 成績分數顯示範例 (p5.js)</title>
+    
+    <!-- 引入 p5.js 函式庫 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.js"></script> 
+
+
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+    <!-- 引入您的分數顯示邏輯 (必須在 p5.js 之後載入) -->
+    <!-- 確保 JS 檔案載入順序正確，以讓變數作用於全域範圍 [4] -->
+    <script src="sketch.js"></script>
+    
     <style>
-        /* 讓畫布置中顯示，並佔滿整個視窗 */
-        body {
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #333; /* 可以設定一個深色背景讓煙火更明顯 */
+        /* 讓內容置中方便查看 */
+        body { 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            min-height: 100vh; 
+            font-family: Arial, sans-serif;
         }
-        canvas {
-            display: block; /* 移除畫布下方可能出現的空白 */
-            border: 1px solid #555; /* 可選：讓畫布邊界更明顯 */
+        #h5pContainer {
+            margin-top: 20px;
         }
+        /* p5.js Canvas 會自動創建在 body 內 */
     </style>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.js"></script>
-    
 </head>
 <body>
-
-    <script src="sketch.js"></script>
-
-    <script>
-        // 為了方便在本機測試分數更新，您可以加入以下模擬程式碼：
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log("網頁載入完成，模擬分數接收中...");
-            
-            // 模擬第一次接收分數 (例如 80/100)
-            setTimeout(() => {
-                window.postMessage({
-                    type: 'H5P_SCORE_RESULT',
-                    score: 80,
-                    maxScore: 100
-                }, '*');
-            }, 1000); // 1 秒後發送
-
-            // 模擬第二次接收分數 (達到 100/100，觸發煙火)
-            setTimeout(() => {
-                window.postMessage({
-                    type: 'H
+    <h1>H5P 互動與 p5.js 成績顯示</h1>
+    
+    <div id="h5pContainer">
+        <!-- 嵌入 H5P 匯出檔案 -->
+        <!-- 將 src 設為 H5P 匯出的 HTML 檔名，例如 h5p_exported.html -->
+        <iframe 
+            id="h5pIframe" 
+            src="1.html" 
+            width="400" 
+            height="300" 
+            style="border: 2px solid #ccc;">
+        </iframe>
+    </div>
+    
+    <!-- 分數將顯示在 p5.js 創建的 Canvas 上 -->
+</body>
+</html>
